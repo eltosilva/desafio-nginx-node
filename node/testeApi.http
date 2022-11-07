@@ -1,0 +1,12 @@
+##Arquivo de teste da API node
+
+post http://localhost:3000/clientes
+Content-Type: application/json
+
+{
+  "nome": "simone",
+  "nasc": "1986-05-05"
+}
+
+###
+get http://localhost:3000/clientes

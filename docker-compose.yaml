@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    build:
+      context: ./mysql
+    tty: true
+    command: --innodb-use-native-aio=0
+    restart: always
+    networks:
+      - fullcycle-net
+    container_name: mysql-server
+    environment:
+      - MYSQL_ROOT_PASSWORD=fullcycle
+      - MYSQL_DATABASE=empresa
+  api:
+    build:
+      context: ./node
+    container_name: node-server
+    tty: true
+    restart: always
+    volumes:
+      - ./node:/src/api
+    ports:
+      - 3000:3000
+    networks:
+      - fullcycle-net
+    depends_on:
+      - db
+
+networks:
+  fullcycle-net:
+    driver: bridge
