@@ -1,6 +1,6 @@
 ##Arquivo de teste da API node
 
-post http://localhost:8080/api/clientes
+post http://localhost:8080/peoples
 Content-Type: application/json
 
 {
@@ -9,4 +9,4 @@ Content-Type: application/json
 }
 
 ###
-get http://localhost:8080/api/clientes
+get http://localhost:8080/peoples

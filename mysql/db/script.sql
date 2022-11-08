@@ -1,7 +1,6 @@
-use empresa;
+use cadastro;
 
-create table if not exists clientes ( 
+create table if not exists people ( 
   id int auto_increment primary key, 
-  nome varchar(50) not null,
-  nasc date not null
+  nome varchar(50) not null
 );

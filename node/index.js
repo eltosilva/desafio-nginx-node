@@ -12,13 +12,13 @@ function getConnection(){
     host: 'mysql-server',
     user: 'root',
     password: 'fullcycle',
-    database: 'empresa'
+    database: 'cadastro'
   }
 
   return mysql.createConnection(config)
 }
 
-app.get('/clientes', (req, res) => {
+app.get('/peoples', (req, res) => {
 
   if(!connection)
     connection = getConnection()
@@ -27,18 +27,18 @@ app.get('/clientes', (req, res) => {
 
   //- Lista de nomes cadastrada no banco de dados.`
 
-  connection.query('select * from clientes;', (erro, rows)=> {
+  connection.query('select * from people;', (erro, rows)=> {
     
     if(erro) throw erro
 
     if(rows){
       html += `<table>
       <thead>
-        <tr><th>Id</th><th>Nome</th><th>Nasc</th></tr>
+        <tr><th>Id</th><th>Nome</th></tr>
       </thead>
       <tbody>`
       rows.forEach(row => {
-        html += `<tr><td>${row?.id}</td><td>${row?.nome}</td><td>${row?.nasc}</td></th>`
+        html += `<tr><td>${row?.id}</td><td>${row?.nome}</td></th>`
       })
       html += '</body></html>'
     }
@@ -48,15 +48,15 @@ app.get('/clientes', (req, res) => {
 })
 
 const jsonParser = bodyParser.json()
-app.post('/clientes', jsonParser, (req, res) => {
+app.post('/peoples', jsonParser, (req, res) => {
 
   if(!connection)
     connection = getConnection()
     
-  const query = `insert into clientes (nome, nasc) values ('${req.body?.nome}', '${req.body?.nasc}');`
+  const query = `insert into people (nome) values ('${req.body?.nome}');`
   
   connection.query(query, (erro, rows)=>{
-    if(erro) console.log(erro)
+    if(erro) throw erro
     res.send(rows)
   })
 })

@@ -9,10 +9,12 @@ services:
     restart: always
     networks:
       - fullcycle-net
+    volumes:
+      - db-vol:/var/lib/mysql
     container_name: mysql-server
     environment:
       - MYSQL_ROOT_PASSWORD=fullcycle
-      - MYSQL_DATABASE=empresa
+      - MYSQL_DATABASE=cadastro
   api:
     build:
       context: ./node
@@ -40,3 +42,5 @@ services:
 networks:
   fullcycle-net:
     driver: bridge
+volumes:
+  db-vol:
