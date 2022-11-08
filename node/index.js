@@ -36,13 +36,17 @@ app.get('/peoples', (req, res) => {
       <thead>
         <tr><th>Id</th><th>Nome</th></tr>
       </thead>
-      <tbody>`
+      <tbody>\n`
       rows.forEach(row => {
-        html += `<tr><td>${row?.id}</td><td>${row?.nome}</td></th>`
+        html += `<tr><td>${row?.id}</td><td>${row?.nome}</td></th>\n`
       })
-      html += '</body></html>'
+      html += `</body>
+      </table>
+      </body>
+      </html>`
     }
 
+    console.log('get executado')
     res.send(html)
   })
 })
@@ -57,6 +61,8 @@ app.post('/peoples', jsonParser, (req, res) => {
   
   connection.query(query, (erro, rows)=>{
     if(erro) throw erro
+
+    console.log('post executado')
     res.send(rows)
   })
 })
